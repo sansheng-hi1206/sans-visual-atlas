@@ -14,7 +14,7 @@ import { initAtlas } from '../app.js';
 import '../styles.css';
 
 const entries = window.VISUAL_ATLAS;
-const orbitEntries = ['daguerreotype', 'cyanotype', 'halftone', 'pinhole-photography', 'autochrome-lumiere', 'film-grain'].map(id => entries.find(item => item.id === id));
+const orbitEntries = ['daguerreotype', 'cyanotype', 'halftone', 'pinhole-photography', 'autochrome-lumiere', 'astrophotography'].map(id => entries.find(item => item.id === id));
 const orbitImages = orbitEntries.map(item => ({ src: item.media, alt: `浏览${item.zh}` }));
 
 function useMedia(query) {
@@ -33,8 +33,8 @@ function Hero({ paused }) {
   return <>
     <AnimatedContent distance={34} duration={1} stagger={0.1} trigger="mount" className="intro-copy-block">
       <p className="eyebrow">A collection for the way you see.</p>
-      <h1 id="title" aria-label="San‘s visual library">
-        <span className="title-owner">San‘s</span>
+      <h1 id="title" aria-label="San's visual library">
+        <span className="title-owner">San's</span>
         <span className="title-line" aria-hidden="true">
           <RotatingText texts={['visual', 'motion']} effect="slide" highlight highlightColor="#383838" staggerDuration={0.025} rotationInterval={4200} pauseOnHover auto={!paused && !reduced} mainClassName="title-rotating" splitLevelClassName="title-mask" />
           <span className="title-library">library</span>

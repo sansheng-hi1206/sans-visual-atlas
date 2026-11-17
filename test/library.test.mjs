@@ -9,7 +9,7 @@ const moduleURL = new URL('src/catalog.js', root);
 
 test('the title uses the requested library name', () => {
   const html = readFileSync(new URL('index.html', root), 'utf8');
-  assert.match(html, /<title>San‘s visual library<\/title>/);
+  assert.match(html, /<title>San's visual library<\/title>/);
 });
 
 test('every entry stays reachable in ordered gallery pages', async () => {

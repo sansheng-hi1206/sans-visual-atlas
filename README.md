@@ -1,4 +1,4 @@
-# San‘s visual library
+# San's visual library
 
 513 条视觉参考、提示词与动效示例，包含 504 条 LetzAI VFX Atlas 资料及 9 条本地教程参考。
 
