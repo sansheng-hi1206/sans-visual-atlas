@@ -77,6 +77,7 @@ select { width: 180px; padding: 12px 25px 12px 10px; font-size: 11px; border: 0;
 .gallery-frame { width: 100%; }
 .accordion-gallery { perspective: 1600px; }
 .ag-panel { box-shadow: 0 8px 18px -16px #38383866; }
+.ag-panel:focus-visible { box-shadow: 0 0 0 2px #888, 0 8px 18px -16px #38383866; }
 .ag-panel__label { left: 18px; bottom: 18px; right: 15px; gap: 11px; }
 .ag-panel__text { font-size: 14px; font-weight: 400; letter-spacing: 1.5px; text-shadow: 0 2px 12px #38383899; }
 .ag-panel__bar { width: 2px; height: 23px; box-shadow: none; }

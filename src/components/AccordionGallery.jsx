@@ -171,13 +171,12 @@ const AccordionGallery = ({
   };
 
   const handleKeyDown = (i, e) => {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-      e.preventDefault();
-      setActive((i + 1) % count);
-    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-      e.preventDefault();
-      setActive((i - 1 + count) % count);
-    }
+    const delta = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
+    if (!delta) return;
+    e.preventDefault();
+    const next = (i + delta + count) % count;
+    setActive(next);
+    panelRefs.current[next]?.focus({ preventScroll: true });
   };
 
   return (

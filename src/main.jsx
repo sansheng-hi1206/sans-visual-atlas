@@ -69,7 +69,7 @@ function CategoryGallery({ category, items, index, renderCard, onPreviewChange, 
       <h2 id={`group-${index}`}>{category}</h2><span>{items.length} 条</span><i className="group-line" aria-hidden="true" />
     </AnimatedContent>
     <div className="gallery-frame" style={{ '--gallery-mobile-height': `${mobileHeight}px` }}>
-      <AccordionGallery key={pageIndex} items={galleryItems} defaultIndex={0} onActiveChange={setActive} height={mobile ? mobileHeight / 1.6 : 310} orientation={mobile ? 'vertical' : 'horizontal'} expandRatio={mobile ? 260 / mobileHeight : 0.56} trigger="hover" radius={1} gap={mobile ? 6 : 9} tilt={mobile ? 0 : 4} parallax={0.25} duration={0.6} overlayColor="#383838" accentColor="#ffffff" />
+      <AccordionGallery key={pageIndex} items={galleryItems} defaultIndex={0} onActiveChange={setActive} height={mobile ? mobileHeight / 1.6 : 310} orientation={mobile ? 'vertical' : 'horizontal'} expandRatio={mobile ? 260 / mobileHeight : 0.56} trigger="click" radius={1} gap={mobile ? 6 : 9} tilt={mobile ? 0 : 4} parallax={0.25} duration={0.6} overlayColor="#383838" accentColor="#ffffff" />
     </div>
     <div className="gallery-pagination">
       <span>预览 {pageIndex * 6 + 1}–{pageIndex * 6 + page.length} / {items.length}</span>
