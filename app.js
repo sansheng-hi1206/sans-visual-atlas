@@ -1,10 +1,12 @@
-(() => {
+export function initAtlas({ renderCatalog, updateMotion }) {
   const data = window.VISUAL_ATLAS || [];
   const $ = selector => document.querySelector(selector);
   const catalog = $('#catalog');
   const state = { tab: 'all', query: '', category: 'all', videos: false, paused: matchMedia('(prefers-reduced-motion: reduce)').matches };
   const visible = new Set();
   let observer;
+  let renderedItems = data;
+  let mediaFrame;
   let toastTimer;
   const escape = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const dynamic = item => ['video', 'animation'].includes(item.mediaType);
@@ -44,6 +46,7 @@
 
   function updatePlayback() {
     const shouldPlay = !state.paused && !document.hidden;
+    updateMotion(!shouldPlay);
     catalog.querySelectorAll('[data-motion="true"]').forEach(el => {
       const active = shouldPlay && visible.has(el);
       el.querySelector('.demo')?.classList.toggle('running', active);
@@ -77,16 +80,23 @@
     updatePlayback();
   }
 
+  function scheduleMediaRefresh() {
+    cancelAnimationFrame(mediaFrame);
+    mediaFrame = requestAnimationFrame(() => {
+      window.MotionAtlas.clear();
+      window.MotionAtlas.mount(catalog, renderedItems);
+      observeMedia();
+    });
+  }
+
   function render() {
     catalog.querySelectorAll('video').forEach(video => video.pause());
     window.MotionAtlas.clear();
     const words = state.query.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);
     const items = data.filter(item => (state.tab === 'all' || item.kind === state.tab) && (state.category === 'all' || item.category === state.category) && (!state.videos || item.mediaType === 'video') && words.every(word => [item.zh, item.en, item.description, item.prompt, item.example, item.category].join(' ').toLocaleLowerCase().includes(word)));
     const groups = [...new Set(items.map(x => x.category))].sort((a,b) => categoryOrder.indexOf(a)-categoryOrder.indexOf(b));
-    catalog.innerHTML = groups.map((category, index) => {
-      const group = items.filter(x => x.category === category);
-      return `<section class="group" aria-labelledby="group-${index}"><div class="group-heading"><h2 id="group-${index}">${escape(category)}</h2><span>${group.length} 条</span><i class="group-line" aria-hidden="true"></i></div><div class="cards">${group.map(card).join('')}</div></section>`;
-    }).join('');
+    renderedItems = items;
+    renderCatalog({ groups, items, renderCard: card, onPreviewChange: scheduleMediaRefresh });
     $('#empty').hidden = items.length > 0;
     $('#result-count').textContent = `显示 ${items.length} / ${data.length} 个条目`;
     catalog.setAttribute('aria-labelledby', `tab-${state.tab}`);
@@ -163,5 +173,15 @@
   catalog.addEventListener('play', event => {
     if (event.target.matches('.reference-video') && state.paused) { state.paused = false; updatePlayback(); }
   }, true);
+  document.addEventListener('atlas:pick', event => {
+    const item = data.find(entry => entry.id === event.detail);
+    if (!item) return;
+    state.query = item.zh;
+    state.videos = false;
+    $('#search').value = item.zh;
+    $('#only-video').checked = false;
+    tabs[0].click();
+    $('#library').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  });
   stats(); categories(); render();
-})();
+}
