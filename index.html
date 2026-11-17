@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="San’s 本地视觉图鉴：看样品、挑风格、复制提示词。完整版。">
+  <title>视觉图鉴 · San’s</title>
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="animations/demos.css">
+  <script defer src="data.js"></script>
+  <script defer src="animations/demos.js"></script>
+  <script defer src="animations/motion-atlas.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#catalog">跳到卡片</a>
+  <header class="masthead wrap">
+    <a class="brand" href="./index.html" aria-label="San’s 视觉图鉴首页">San’s<span class="brand-dot" aria-hidden="true"></span></a>
+    <span class="edition">本地收藏 / 完整版</span>
+  </header>
+  <main class="wrap">
+    <section class="intro" aria-labelledby="title">
+      <div>
+        <p class="eyebrow">给画面找一种说法</p>
+        <h1 id="title">视觉图鉴<span class="title-period">。</span></h1>
+        <p class="intro-copy">先看画面，再挑手法。把喜欢的视觉，变成可以直接对 AI 说的话。</p>
+        <p class="provenance">收录自 <a href="https://atlas.letz.ai/" target="_blank" rel="noopener">LetzAI VFX Atlas ↗</a> 与本地视频参考。</p>
+      </div>
+      <div class="intro-aside" aria-hidden="true"><span>看起来怎样</span><div class="visual-mark"><i></i><i></i><i></i><b>↗</b></div><span>让它怎么动</span></div>
+    </section>
+    <section id="stats" class="stats" aria-label="条目统计"></section>
+    <p class="collection-note">504 条来自原站，9 条来自本地教程。英文提示词保留原文，中文说明与动作示意由 San’s 整理。</p>
+    <section class="library" aria-label="视觉资料库">
+      <div class="library-bar">
+        <div class="tabs" role="tablist" aria-label="资料类型">
+          <button id="tab-all" role="tab" aria-selected="true" aria-controls="catalog" data-tab="all">全部资料 <span></span></button>
+          <button id="tab-style" role="tab" aria-selected="false" aria-controls="catalog" data-tab="style" tabindex="-1">画面风格 <span></span></button>
+          <button id="tab-motion" role="tab" aria-selected="false" aria-controls="catalog" data-tab="motion" tabindex="-1">动效手法 <span></span></button>
+        </div>
+        <button id="play-toggle" class="play-toggle" type="button" aria-pressed="false"><span aria-hidden="true">Ⅱ</span> 暂停全部</button>
+      </div>
+      <div class="filters">
+        <label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="搜索名称、介绍、提示词…" aria-label="搜索中英文名称、介绍、提示词"></label>
+        <label class="category-label"><span class="sr-only">分类</span><select id="category" aria-label="按分类筛选"><option value="all">全部分类</option></select></label>
+        <label class="video-check"><input id="only-video" type="checkbox">只看有视频的</label>
+      </div>
+      <div class="result-line"><p id="result-count" aria-live="polite"></p><span>原文保留 · 补充内容另标</span></div>
+      <div id="catalog" role="tabpanel" aria-labelledby="tab-all" tabindex="0"></div>
+      <div id="empty" class="empty" hidden><p>没有找到符合条件的条目</p><span>换个关键词，或清除筛选再看看。</span><button id="reset" type="button">清除筛选</button></div>
+      <noscript>请在浏览器中启用 JavaScript，才能显示卡片和复制提示词。</noscript>
+    </section>
+  </main>
+  <footer class="footer wrap">
+    <div><a class="brand" href="./index.html">San’s</a><p>把看过的画面，留在手边。</p></div>
+    <div class="footer-notes"><p>资料来源：<a href="https://atlas.letz.ai/" target="_blank" rel="noopener">LetzAI VFX Atlas</a>、本地《图片与转场》视频。</p><p>原图与动图按卡片标注保留作者及许可；本地视频作者、发布链接与许可待核实。原站文字未查到统一开放许可。</p><p>中文整理：San’s · 本页为 504 条网站资料与 9 条本地动效。</p></div>
+  </footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <dialog id="copy-fallback"><form method="dialog"><h2>手动复制</h2><p>浏览器未允许自动复制。选中下面的文字后复制即可。</p><textarea readonly aria-label="待复制文字"></textarea><button value="close">关闭</button></form></dialog>
+</body>
+</html>
