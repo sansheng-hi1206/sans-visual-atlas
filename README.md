@@ -2,7 +2,11 @@
 
 513 条视觉参考、提示词与动效示例，包含 504 条 LetzAI VFX Atlas 资料及 9 条本地教程参考。
 
-网页入口由 GitHub Pages 提供。页面所用图片、视频和代码随仓库存放，浏览图鉴不需要连接 ChatGPT。
+网页入口：[打开 San’s 视觉图鉴](https://sansheng-hi1206.github.io/sans-visual-atlas/)
+
+页面所用图片、视频和代码随仓库存放，浏览图鉴无需登录 GitHub 或 ChatGPT。
+
+本地内容修改后需更新本仓库；推送到 `main` 分支后，GitHub Pages 会自动重新发布。
 
 ## 来源与许可
 
